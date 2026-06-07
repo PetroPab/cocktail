@@ -173,7 +173,7 @@ export default function ReviewsPage() {
 
                 {/* CTA */}
                 <div
-                  className="inline-flex items-center justify-center gap-2 h-12 px-6 text-sm tracking-widest uppercase font-medium transition-colors duration-150 text-[var(--color-bg)]"
+                  className="btn-shimmer inline-flex items-center justify-center gap-2 h-12 px-6 text-sm tracking-widest uppercase font-medium transition-colors duration-150 text-[var(--color-bg)]"
                   style={{ background: "var(--color-amber)" }}
                 >
                   Написать отзыв <ArrowRight size={16} weight="bold" />

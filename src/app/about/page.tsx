@@ -237,7 +237,7 @@ export default async function AboutPage() {
             </div>
             <Link
               href="/contacts"
-              className="shrink-0 inline-flex items-center gap-2 h-12 px-8 text-sm tracking-widest uppercase
+              className="btn-shimmer shrink-0 inline-flex items-center gap-2 h-12 px-8 text-sm tracking-widest uppercase
                 bg-[var(--color-amber)] text-[var(--color-bg)] hover:bg-[var(--color-amber-hover)] transition-colors"
             >
               Как добраться <ArrowRight size={16} weight="bold" />

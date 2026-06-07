@@ -223,9 +223,46 @@
     to   { background-position: -200% 0; }
   }
 
+  /* ── Shimmer on CTA buttons — add .btn-shimmer to any button/link ── */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.28) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 650ms ease-in-out;
+    pointer-events: none;
+  }
+  .btn-shimmer:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* ── Logo neon glow — пульсирующая неоновая вывеска ── */
+  @keyframes neon-pulse {
+    0%, 100% {
+      filter: brightness(0) invert(1)
+              drop-shadow(0 0 3px rgba(255,255,255,0.6))
+              drop-shadow(0 0 10px rgba(157,142,219,0.45));
+    }
+    50% {
+      filter: brightness(0) invert(1)
+              drop-shadow(0 0 7px rgba(255,255,255,0.95))
+              drop-shadow(0 0 22px rgba(157,142,219,0.75))
+              drop-shadow(0 0 40px rgba(157,142,219,0.4));
+    }
+  }
+  .logo-neon {
+    animation: neon-pulse 3.5s ease-in-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-track { animation: none; }
     .grain::after  { animation: none; }
     .img-wrap::before { animation: none; }
+    .logo-neon { animation: none; filter: brightness(0) invert(1); }
   }
 }

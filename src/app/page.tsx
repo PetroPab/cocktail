@@ -303,7 +303,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/contacts#booking"
-                className="inline-flex items-center gap-2 h-14 px-10 text-sm tracking-widest uppercase font-medium
+                className="btn-shimmer inline-flex items-center gap-2 h-14 px-10 text-sm tracking-widest uppercase font-medium
                   bg-[var(--color-amber)] text-[var(--color-bg)] hover:bg-[var(--color-amber-hover)] transition-colors duration-150"
               >
                 Забронировать стол <ArrowRight size={16} weight="bold" />

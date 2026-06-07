@@ -234,7 +234,7 @@ export default function PromoPage() {
             <div className="flex flex-col sm:flex-row gap-3 shrink-0">
               <a
                 href="tel:+74852337356"
-                className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm tracking-widest uppercase
+                className="btn-shimmer inline-flex items-center justify-center gap-2 h-12 px-7 text-sm tracking-widest uppercase
                   bg-[var(--color-amber)] text-[var(--color-bg)] hover:bg-[var(--color-amber-hover)] transition-colors"
               >
                 <Phone size={16} weight="bold" /> Позвонить
@@ -243,7 +243,7 @@ export default function PromoPage() {
                 href="https://t.me/s/cocktailbar_yar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm tracking-widest uppercase
+                className="btn-shimmer inline-flex items-center justify-center gap-2 h-12 px-7 text-sm tracking-widest uppercase
                   border border-[var(--color-border-light)] text-[var(--color-text)] hover:border-[var(--color-amber)] hover:text-[var(--color-amber)]
                   transition-colors"
               >

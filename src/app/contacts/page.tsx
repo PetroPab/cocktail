@@ -134,7 +134,7 @@ export default function ContactsPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href={phoneHref}
-                  className="inline-flex items-center justify-center gap-3 h-14 px-8 text-sm tracking-widest uppercase font-medium
+                  className="btn-shimmer inline-flex items-center justify-center gap-3 h-14 px-8 text-sm tracking-widest uppercase font-medium
                     bg-[var(--color-amber)] text-[var(--color-bg)] hover:bg-[var(--color-amber-hover)] transition-colors"
                 >
                   <Phone size={18} weight="bold" />
@@ -144,7 +144,7 @@ export default function ContactsPage() {
                   href={bookingHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 h-14 px-8 text-sm tracking-widest uppercase
+                  className="btn-shimmer inline-flex items-center justify-center gap-3 h-14 px-8 text-sm tracking-widest uppercase
                     border border-[var(--color-border-light)] text-[var(--color-text)] hover:border-[var(--color-amber)] hover:text-[var(--color-amber)]
                     transition-colors"
                 >

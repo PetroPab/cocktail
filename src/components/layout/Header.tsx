@@ -51,7 +51,7 @@ export function Header() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="group shrink-0 relative overflow-hidden"
+            className="shrink-0"
             aria-label="Бар Коктейль — на главную"
           >
             <Image
@@ -59,13 +59,8 @@ export function Header() {
               alt="Бар Коктейль"
               width={201}
               height={36}
-              className="h-9 w-auto brightness-0 invert transition-opacity duration-300 group-hover:opacity-70"
+              className="h-9 w-auto logo-neon"
               priority
-            />
-            <span
-              aria-hidden
-              className="absolute inset-0 pointer-events-none -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"
-              style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)" }}
             />
           </Link>
 
@@ -93,7 +88,7 @@ export function Header() {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               href="/contacts#booking"
-              className="hidden md:inline-flex items-center gap-2 h-10 px-5 text-xs tracking-widest uppercase font-semibold
+              className="btn-shimmer hidden md:inline-flex items-center gap-2 h-10 px-5 text-xs tracking-widest uppercase font-semibold
                 bg-[var(--color-amber)] text-[var(--color-bg)] hover:bg-[var(--color-amber-hover)]
                 transition-colors duration-150"
             >
