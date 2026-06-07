@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -187,7 +187,7 @@ export default function HomePage() {
             <a
               data-reveal
               data-reveal-delay="0"
-              href="https://vk.com/kokteilbar"
+              href="https://vk.com/bar_cocktail"
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-[var(--color-bg-surface)] hover:bg-[var(--color-bg-elevated)] transition-colors duration-300 p-8 flex flex-col gap-6"
@@ -202,7 +202,7 @@ export default function HomePage() {
                 <p className="text-xl text-[var(--color-text)] group-hover:text-[var(--color-amber)] transition-colors duration-300 font-semibold mb-1">
                   ВКонтакте
                 </p>
-                <p className="text-xs text-[var(--color-text-subtle)] tracking-wide">vk.com/kokteilbar</p>
+                <p className="text-xs text-[var(--color-text-subtle)] tracking-wide">vk.com/bar_cocktail</p>
               </div>
               <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                 Афиша вечеринок, акции и новости бара
@@ -213,7 +213,7 @@ export default function HomePage() {
             <a
               data-reveal
               data-reveal-delay="0.12"
-              href="https://t.me/kokteilbar"
+              href="https://t.me/s/cocktailbar_yar"
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-[var(--color-bg-surface)] hover:bg-[var(--color-bg-elevated)] transition-colors duration-300 p-8 flex flex-col gap-6"
@@ -226,7 +226,7 @@ export default function HomePage() {
                 <p className="text-xl text-[var(--color-text)] group-hover:text-[var(--color-amber)] transition-colors duration-300 font-semibold mb-1">
                   Telegram
                 </p>
-                <p className="text-xs text-[var(--color-text-subtle)] tracking-wide">t.me/kokteilbar</p>
+                <p className="text-xs text-[var(--color-text-subtle)] tracking-wide">t.me/s/cocktailbar_yar</p>
               </div>
               <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                 Эксклюзивные акции и анонсы первыми
@@ -237,7 +237,7 @@ export default function HomePage() {
             <a
               data-reveal
               data-reveal-delay="0.24"
-              href="https://instagram.com/kokteilbar"
+              href="https://instagram.com/cocktail_bar_yar"
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-[var(--color-bg-surface)] hover:bg-[var(--color-bg-elevated)] transition-colors duration-300 p-8 flex flex-col gap-6"
@@ -250,7 +250,7 @@ export default function HomePage() {
                 <p className="text-xl text-[var(--color-text)] group-hover:text-[var(--color-amber)] transition-colors duration-300 font-semibold mb-1">
                   Instagram
                 </p>
-                <p className="text-xs text-[var(--color-text-subtle)] tracking-wide">@kokteilbar</p>
+                <p className="text-xs text-[var(--color-text-subtle)] tracking-wide">@cocktail_bar_yar</p>
               </div>
               <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                 Фото коктейлей, интерьера и атмосферы

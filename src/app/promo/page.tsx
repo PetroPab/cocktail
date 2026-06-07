@@ -255,7 +255,7 @@ export default function PromoPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="https://t.me/kokteilbar"
+                  href="https://t.me/s/cocktailbar_yar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 h-12 px-8 text-sm tracking-widest uppercase

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function ContactsPage() {
-  const bookingHref = "https://t.me/kokteilbar";
+  const bookingHref = "https://t.me/s/cocktailbar_yar";
   const phoneHref = "tel:+74852337356";
   const waHref = "https://wa.me/74852337356";
   const mapsHref = "https://yandex.ru/maps/org/kokteyl/1357359355/";

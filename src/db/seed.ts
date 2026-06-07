@@ -1,4 +1,4 @@
-import { loadEnvConfig } from "@next/env";
+﻿import { loadEnvConfig } from "@next/env";
 loadEnvConfig(process.cwd());
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
@@ -329,7 +329,7 @@ const SEED_SETTINGS = [
   { key: "hours", value: "Круглосуточно, 24/7" },
   { key: "address", value: "ул. Кирова, 5/23, 2-й этаж, Ярославль, 150000" },
   { key: "phone", value: "+7 (4852) 33-73-56" },
-  { key: "telegram", value: "t.me/kokteilbar" },
+  { key: "telegram", value: "t.me/s/cocktailbar_yar" },
 ];
 
 async function main() {

@@ -21,9 +21,9 @@ function VkIcon({ size = 20 }: { size?: number }) {
 }
 
 const SOCIALS = [
-  { href: "https://vk.com/kokteilbar",        label: "ВКонтакте",  handle: "vk.com/kokteilbar",    Icon: VkIcon },
-  { href: "https://t.me/kokteilbar",           label: "Telegram",   handle: "t.me/kokteilbar",      Icon: TelegramLogoIcon },
-  { href: "https://instagram.com/kokteilbar",  label: "Instagram",  handle: "@kokteilbar",          Icon: InstagramLogoIcon },
+  { href: "https://vk.com/bar_cocktail",        label: "ВКонтакте",  handle: "vk.com/bar_cocktail",    Icon: VkIcon },
+  { href: "https://t.me/s/cocktailbar_yar",           label: "Telegram",   handle: "t.me/s/cocktailbar_yar",      Icon: TelegramLogoIcon },
+  { href: "https://instagram.com/cocktail_bar_yar",  label: "Instagram",  handle: "@cocktail_bar_yar",          Icon: InstagramLogoIcon },
 ];
 
 export async function Footer() {

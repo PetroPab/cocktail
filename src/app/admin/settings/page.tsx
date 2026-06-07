@@ -1,4 +1,4 @@
-import { getAllSettings } from "@/db/queries";
+﻿import { getAllSettings } from "@/db/queries";
 import { saveSettings } from "./actions";
 
 export const metadata = { title: "Настройки — Панель управления" };
@@ -7,7 +7,7 @@ const STANDARD_SETTINGS: Array<{ key: string; label: string; placeholder?: strin
   { key: "hours",    label: "Режим работы",          placeholder: "Круглосуточно, 24/7" },
   { key: "address",  label: "Адрес",                  placeholder: "ул. Кирова, 5/23, 2-й этаж, Ярославль" },
   { key: "phone",    label: "Телефон",                placeholder: "+7 (4852) 33-73-56" },
-  { key: "telegram", label: "Telegram",               placeholder: "t.me/kokteilbar" },
+  { key: "telegram", label: "Telegram",               placeholder: "t.me/s/cocktailbar_yar" },
 ];
 
 const inputCls = "w-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] px-3 h-9 text-sm outline-none focus:border-[var(--color-amber)] transition-colors";
