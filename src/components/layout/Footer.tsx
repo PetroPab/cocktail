@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import Image from "next/image";
 import { MapPinIcon, PhoneIcon, ClockIcon, TelegramLogoIcon, InstagramLogoIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { getSettings } from "@/db/queries";
 
@@ -51,15 +52,13 @@ export async function Footer() {
 
           {/* Brand */}
           <div className="md:col-span-1">
-            <p
-              className="text-5xl text-[var(--color-text)] mb-3"
-              style={{ fontFamily: "var(--font-display)", letterSpacing: "0.1em" }}
-            >
-              КОКТЕЙЛЬ
-            </p>
-            <p className="text-[10px] tracking-[0.3em] text-[var(--color-text-subtle)] uppercase mb-5">
-              Bar · Yaroslavl · 1996
-            </p>
+            <Image
+              src="/logo-cocktail-2lines.svg"
+              alt="Бар Коктейль"
+              width={130}
+              height={48}
+              className="h-12 w-auto mb-5"
+            />
             <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
               Почти 30 лет в сердце Ярославля. Вкус, музыка и атмосфера.
             </p>

@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
@@ -50,17 +51,16 @@ export function Header() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="flex flex-col leading-none group shrink-0"
+            className="shrink-0 opacity-90 hover:opacity-100 transition-opacity duration-150"
           >
-            <span
-              className="text-2xl tracking-widest text-[var(--color-text)] transition-colors group-hover:text-[var(--color-amber)]"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
-            >
-              КОКТЕЙЛЬ
-            </span>
-            <span className="text-[9px] tracking-[0.3em] text-[var(--color-text-subtle)] uppercase">
-              BAR · YAROSLAVL · 1996
-            </span>
+            <Image
+              src="/logo-cocktail-1line.svg"
+              alt="Бар Коктейль"
+              width={201}
+              height={36}
+              className="h-9 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

@@ -30,6 +30,15 @@ export const metadata: Metadata = {
   description:
     "Легендарный коктейль-бар в центре Ярославля. 50+ авторских коктейлей, живая музыка, летняя терраса. Работаем круглосуточно. Кирова, 5/23.",
   keywords: ["бар ярославль", "коктейль бар ярославль", "бар кирова ярославль", "коктейли ярославль", "ночной бар ярославль"],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: { url: "/apple-icon.png", sizes: "180x180" },
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "Бар Коктейль — Ярославль с 1996 года",
     description: "Легендарный коктейль-бар в центре Ярославля. 50+ коктейлей, живая музыка, летняя терраса. Работаем круглосуточно.",
