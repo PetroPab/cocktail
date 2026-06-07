@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { MapPinIcon, PhoneIcon, ClockIcon, TelegramLogoIcon, InstagramLogoIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { getSettings } from "@/db/queries";
 
 const NAV = [
   { href: "/menu",     label: "Меню" },
@@ -24,7 +25,9 @@ const SOCIALS = [
   { href: "https://instagram.com/kokteilbar",  label: "Instagram",  handle: "@kokteilbar",          Icon: InstagramLogoIcon },
 ];
 
-export function Footer() {
+export async function Footer() {
+  const s = await getSettings();
+  const hours = s.hours ?? "Круглосуточно, 24/7";
   return (
     <footer className="border-t border-[var(--color-border)] mt-16 md:mt-24">
       {/* Marquee */}
@@ -77,7 +80,7 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-3 text-sm text-[var(--color-text-muted)]">
               <ClockIcon size={18} weight="bold" className="shrink-0 text-[var(--color-amber)]" />
-              <span>Круглосуточно, 24/7</span>
+              <span>{hours}</span>
             </div>
           </div>
 

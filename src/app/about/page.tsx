@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArrowRightIcon as ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { getLatestPublishedPosts } from "@/db/queries";
 import { getLatestPosts, formatDate } from "@/data/news";
 
 export const metadata: Metadata = {
@@ -26,8 +27,9 @@ const VALUES = [
   { label: "Открытость", desc: "Мы работаем 24/7. Приходите в любое время — мы всегда рады гостям." },
 ];
 
-export default function AboutPage() {
-  const latestPosts = getLatestPosts(3);
+export default async function AboutPage() {
+  const dbPosts = await getLatestPublishedPosts(3);
+  const latestPosts = dbPosts.length > 0 ? dbPosts : getLatestPosts(3);
   return (
     <>
       <Header />

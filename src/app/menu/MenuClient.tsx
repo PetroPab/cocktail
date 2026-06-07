@@ -5,7 +5,7 @@ import Image from "next/image";
 import { WineIcon, ForkKnifeIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
-type MenuItem = {
+export type MenuItem = {
   name: string;
   weight?: string;
   price: number;
@@ -14,13 +14,11 @@ type MenuItem = {
   img?: string;
 };
 
-type Category = {
+export type Category = {
   id: string;
   label: string;
   items: MenuItem[];
-  /** Group items by badge field and show as subheadings, no chips on cards */
   groupByBadge?: boolean;
-  /** Show colored badge chips (authored cocktails) */
   coloredBadges?: boolean;
 };
 
@@ -555,11 +553,19 @@ function CategorySection({ cat }: { cat: Category }) {
 // ── MenuClient ─────────────────────────────────────────────────────────────
 type Tab = "bar" | "kitchen";
 
-export function MenuClient() {
+export function MenuClient({
+  barOverride,
+  kitchenOverride,
+}: {
+  barOverride?: Category[];
+  kitchenOverride?: Category[];
+} = {}) {
+  const BAR_DATA = barOverride ?? BAR;
+  const KITCHEN_DATA = kitchenOverride ?? KITCHEN;
   const [tab, setTab] = useState<Tab>("bar");
-  const [activeId, setActiveId] = useState<string>(BAR[0].id);
+  const [activeId, setActiveId] = useState<string>(BAR_DATA[0].id);
   const navRef = useRef<HTMLDivElement>(null);
-  const categories = tab === "bar" ? BAR : KITCHEN;
+  const categories = tab === "bar" ? BAR_DATA : KITCHEN_DATA;
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -570,13 +576,13 @@ export function MenuClient() {
   };
 
   useEffect(() => {
-    const cats = tab === "bar" ? BAR : KITCHEN;
+    const cats = tab === "bar" ? BAR_DATA : KITCHEN_DATA;
     setActiveId(cats[0].id);
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [tab]);
+  }, [tab]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    const cats = tab === "bar" ? BAR : KITCHEN;
+    const cats = tab === "bar" ? BAR_DATA : KITCHEN_DATA;
     const navH = navRef.current?.offsetHeight ?? 120;
     const topMargin = -(72 + navH);
 
@@ -590,7 +596,7 @@ export function MenuClient() {
       { rootMargin: `${topMargin}px 0px -55% 0px`, threshold: 0 },
     );
 
-    cats.forEach((cat) => {
+    cats.forEach((cat: Category) => {
       const el = document.getElementById(cat.id);
       if (el) observer.observe(el);
     });

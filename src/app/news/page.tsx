@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { getPublishedPosts } from "@/db/queries";
 import { POSTS, formatDate } from "@/data/news";
 
 export const metadata: Metadata = {
@@ -12,14 +13,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://kokteil-bar.ru/news" },
 };
 
-const articles = POSTS.filter((p) => p.category === "article").sort(
-  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-);
-const news = POSTS.filter((p) => p.category === "news").sort(
-  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-);
+export default async function NewsPage() {
+  const dbPosts = await getPublishedPosts();
+  const allPosts = dbPosts.length > 0 ? dbPosts : POSTS;
 
-export default function NewsPage() {
+  const articles = allPosts
+    .filter((p) => p.category === "article")
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const news = allPosts
+    .filter((p) => p.category === "news")
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <>
       <Header />
@@ -104,7 +109,7 @@ export default function NewsPage() {
                 НОВОСТИ
               </h2>
               <span className="text-xs tracking-widest uppercase text-[var(--color-text-subtle)]">
-                {news.length} новости
+                {news.length} {news.length === 1 ? "новость" : "новости"}
               </span>
             </div>
 

@@ -5,17 +5,21 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { getPublishedPosts, getPostBySlug } from "@/db/queries";
 import { POSTS, getPost, formatDate } from "@/data/news";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }));
+  const dbPosts = await getPublishedPosts();
+  const slugs = dbPosts.length > 0 ? dbPosts.map((p) => p.slug) : POSTS.map((p) => p.slug);
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const dbPost = await getPostBySlug(slug);
+  const post = dbPost ?? getPost(slug);
   if (!post) return {};
   return {
     title: `${post.title} — Бар Коктейль Ярославль`,
@@ -80,7 +84,6 @@ function renderContent(text: string) {
         <div key={i} className="my-8 border-t border-[var(--color-border)]" />
       );
     } else {
-      // inline **bold** in paragraph
       const parts = line.split(/(\*\*[^*]+\*\*)/g).map((part, j) =>
         part.startsWith("**") && part.endsWith("**")
           ? <strong key={j} className="text-[var(--color-text)] font-semibold">{part.slice(2, -2)}</strong>
@@ -99,10 +102,13 @@ function renderContent(text: string) {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const dbPost = await getPostBySlug(slug);
+  const post = dbPost ?? getPost(slug);
   if (!post) notFound();
 
-  const related = POSTS
+  const dbAll = await getPublishedPosts();
+  const allPosts = dbAll.length > 0 ? dbAll : POSTS;
+  const related = allPosts
     .filter((p) => p.slug !== slug && p.category === post.category)
     .slice(0, 2);
 
