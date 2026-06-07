@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArrowRightIcon as ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { getLatestPosts, formatDate } from "@/data/news";
 
 export const metadata: Metadata = {
   title: "О нас — Бар Коктейль Ярославль",
@@ -26,6 +27,7 @@ const VALUES = [
 ];
 
 export default function AboutPage() {
+  const latestPosts = getLatestPosts(3);
   return (
     <>
       <Header />
@@ -147,6 +149,70 @@ export default function AboutPage() {
                 <p className="text-[var(--color-text-muted)] leading-relaxed">{v.desc}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* News */}
+        <section className="container-site py-24">
+          <div className="flex items-end justify-between mb-12 gap-4">
+            <div>
+              <p className="text-xs tracking-[0.4em] uppercase text-[var(--color-amber)] mb-3">Медиа</p>
+              <h2
+                className="text-4xl md:text-6xl text-[var(--color-text)] leading-none"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                НОВОСТИ
+              </h2>
+            </div>
+            <Link
+              href="/news"
+              className="shrink-0 hidden md:inline-flex items-center gap-2 text-sm tracking-widest uppercase text-[var(--color-amber)] hover:gap-4 transition-all duration-200 link-line"
+            >
+              Все материалы <ArrowRight size={16} weight="bold" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--color-border)]">
+            {latestPosts.map((post, i) => (
+              <Link
+                key={post.slug}
+                href={`/news/${post.slug}`}
+                data-reveal
+                data-reveal-delay={String(i * 0.1)}
+                className="group bg-[var(--color-bg-surface)] hover:bg-[var(--color-bg-elevated)] transition-colors duration-200 flex flex-col"
+              >
+                <div className="relative h-44 overflow-hidden shrink-0">
+                  <Image
+                    src={post.img}
+                    alt={post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-[var(--color-bg)] opacity-30" />
+                  <span className="absolute top-3 left-3 text-[10px] tracking-widest uppercase text-[var(--color-amber)] bg-[var(--color-bg)] px-2 py-1">
+                    {post.tag}
+                  </span>
+                </div>
+                <div className="p-5 flex flex-col gap-2 flex-1">
+                  <p className="text-xs text-[var(--color-text-subtle)]">{formatDate(post.date)}</p>
+                  <h3
+                    className="text-lg text-[var(--color-text)] group-hover:text-[var(--color-amber)] transition-colors leading-snug flex-1"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {post.title}
+                  </h3>
+                  <div className="flex items-center gap-2 text-xs text-[var(--color-amber)] mt-2">
+                    Читать <ArrowRight size={12} weight="bold" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-6 md:hidden">
+            <Link href="/news" className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-[var(--color-amber)] link-line">
+              Все материалы <ArrowRight size={16} weight="bold" />
+            </Link>
           </div>
         </section>
 

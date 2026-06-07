@@ -1,10 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { MapPinIcon, PhoneIcon, ClockIcon, TelegramLogoIcon, InstagramLogoIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 
 const NAV = [
   { href: "/menu",     label: "Меню" },
   { href: "/promo",    label: "Акции" },
   { href: "/about",    label: "О нас" },
+  { href: "/news",     label: "Новости" },
   { href: "/reviews",  label: "Отзывы" },
   { href: "/contacts", label: "Контакты" },
 ];
