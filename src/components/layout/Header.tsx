@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   ListIcon, XIcon,
-  ForkKnifeIcon, TagIcon, InfoIcon, StarIcon, MapPinIcon, ArrowRightIcon, NewspaperIcon,
+  ForkKnifeIcon, TagIcon, InfoIcon, StarIcon, MapPinIcon, ArrowRightIcon,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,6 @@ const NAV = [
   { href: "/menu",     label: "Меню",     Icon: ForkKnifeIcon },
   { href: "/promo",    label: "Акции",    Icon: TagIcon },
   { href: "/about",    label: "О нас",    Icon: InfoIcon },
-  { href: "/news",     label: "Новости",  Icon: NewspaperIcon },
   { href: "/reviews",  label: "Отзывы",   Icon: StarIcon },
   { href: "/contacts", label: "Контакты", Icon: MapPinIcon },
 ];

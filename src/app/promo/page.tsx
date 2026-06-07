@@ -1,26 +1,49 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { BLUR_DATA_URL } from "@/lib/imageUtils";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArrowRightIcon as ArrowRight } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
   title: "Акции и скидки — Бар Коктейль Ярославль",
-  description: "Актуальные акции, скидки и специальные предложения бара Коктейль в Ярославле. Счастливые часы, DJ-вечеринки, тематические вечера.",
+  description: "Календарь скидок бара Коктейль: -50% на коктейли по понедельникам, пивной вторник, день сюрпризов, крепкий четверг. Ярославль, ул. Кирова 5/23.",
   alternates: { canonical: "https://kokteil-bar.ru/promo" },
 };
 
-const PROMOS = [
+const WEEKLY = [
   {
-    tag: "Каждый день",
-    title: "Счастливые часы",
-    subtitle: "16:00 — 20:00",
-    desc: "Скидка 20% на все коктейли и пиво с понедельника по пятницу. Лучшее время, чтобы заглянуть после работы.",
-    accent: "var(--color-amber)",
-    badge: "−20%",
-    img: "https://picsum.photos/seed/happyhour/800/500",
+    day: "Понедельник",
+    name: "День коктейля",
+    badge: "−50%",
+    desc: "На все алкогольные коктейли",
+    accent: "oklch(65% 0.28 340)",
   },
+  {
+    day: "Вторник",
+    name: "Пивной день",
+    badge: "−25%",
+    desc: "На всё пиво и стритфуд",
+    accent: "oklch(65% 0.18 200)",
+  },
+  {
+    day: "Среда",
+    name: "День сюрпризов",
+    badge: "🎁",
+    desc: "Подарки от бара при чеке от 1000 ₽",
+    accent: "oklch(70% 0.17 55)",
+  },
+  {
+    day: "Крепкий четверг",
+    name: "Для разгона выкенда",
+    badge: "−25%",
+    desc: "На все крепкие напитки",
+    accent: "oklch(60% 0.22 15)",
+  },
+];
+
+const PROMOS = [
   {
     tag: "Пятница и Суббота",
     title: "DJ-ночи",
@@ -58,9 +81,9 @@ const PROMOS = [
     img: "https://picsum.photos/seed/corporate/800/500",
   },
   {
-    tag: "Летом",
-    title: "Терраса открыта",
-    subtitle: "Май — Сентябрь",
+    tag: "Май — Сентябрь",
+    title: "Летняя терраса",
+    subtitle: "Круглосуточно",
     desc: "Летняя терраса в центре Ярославля. Лучшее место для вечера на свежем воздухе с коктейлем в руке.",
     accent: "oklch(70% 0.15 150)",
     badge: "☀",
@@ -83,6 +106,9 @@ export default function PromoPage() {
               fill
               className="object-cover opacity-15"
               priority
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
             />
           </div>
           <div className="container-site relative z-10">
@@ -102,8 +128,71 @@ export default function PromoPage() {
           </div>
         </section>
 
-        {/* Promos grid */}
+        {/* Календарь скидок */}
+        <section className="container-site pt-16 md:pt-24 pb-16">
+          <div className="mb-10">
+            <p className="text-xs tracking-[0.4em] uppercase text-[var(--color-amber)] mb-3">Каждую неделю</p>
+            <h2
+              className="text-4xl md:text-6xl text-[var(--color-text)] leading-none"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              КАЛЕНДАРЬ СКИДОК
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[var(--color-border)]">
+            {WEEKLY.map((item, i) => (
+              <div
+                key={item.day}
+                data-reveal
+                data-reveal-delay={String((i % 2) * 0.1)}
+                className="bg-[var(--color-bg-surface)] hover:bg-[var(--color-bg-elevated)] transition-colors duration-200 p-8 md:p-10 flex flex-col gap-4"
+              >
+                {/* Day */}
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p
+                      className="text-3xl md:text-4xl text-[var(--color-text)] leading-none mb-1"
+                      style={{ fontFamily: "var(--font-display)", color: item.accent }}
+                    >
+                      {item.day.toUpperCase()}
+                    </p>
+                    <p className="text-xs tracking-widest uppercase text-[var(--color-text-subtle)]">
+                      {item.name}
+                    </p>
+                  </div>
+                  <span
+                    className="shrink-0 text-3xl md:text-4xl leading-none pt-0.5"
+                    style={{ fontFamily: "var(--font-display)", color: item.accent }}
+                  >
+                    {item.badge}
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="border-t border-[var(--color-border)]" />
+
+                {/* Description */}
+                <p className="text-xl md:text-2xl text-[var(--color-text)] leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Остальные акции */}
         <section className="container-site pb-32">
+          <div className="mb-10">
+            <p className="text-xs tracking-[0.4em] uppercase text-[var(--color-amber)] mb-3">Постоянные предложения</p>
+            <h2
+              className="text-4xl md:text-6xl text-[var(--color-text)] leading-none"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              СПЕЦПРЕДЛОЖЕНИЯ
+            </h2>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)]">
             {PROMOS.map((p, i) => (
               <article
@@ -112,7 +201,6 @@ export default function PromoPage() {
                 data-reveal-delay={String((i % 3) * 0.1)}
                 className="bg-[var(--color-bg-surface)] hover:bg-[var(--color-bg-elevated)] transition-colors duration-200 group flex flex-col"
               >
-                {/* Photo */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={p.img}
@@ -121,7 +209,6 @@ export default function PromoPage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-[var(--color-bg)] opacity-40" />
-                  {/* Badge */}
                   <span
                     className="absolute bottom-3 right-3 text-2xl leading-none px-3 py-1"
                     style={{ fontFamily: "var(--font-display)", color: p.accent, background: "var(--color-bg)" }}
@@ -133,12 +220,12 @@ export default function PromoPage() {
                 <div className="p-8 flex flex-col flex-1 gap-3">
                   <span className="text-[10px] tracking-widest uppercase text-[var(--color-text-subtle)]">{p.tag}</span>
                   <div>
-                    <h2
+                    <h3
                       className="text-3xl text-[var(--color-text)] leading-none mb-1"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {p.title}
-                    </h2>
+                    </h3>
                     <p className="text-sm font-medium" style={{ color: p.accent }}>
                       {p.subtitle}
                     </p>
@@ -188,6 +275,7 @@ export default function PromoPage() {
             </div>
           </div>
         </section>
+
       </main>
       <Footer />
     </>

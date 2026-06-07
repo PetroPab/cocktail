@@ -29,7 +29,7 @@ export async function Footer() {
   const s = await getSettings();
   const hours = s.hours ?? "Круглосуточно, 24/7";
   return (
-    <footer className="border-t border-[var(--color-border)] mt-16 md:mt-24">
+    <footer className="border-t border-[var(--color-border)]">
       {/* Marquee */}
       <div className="overflow-hidden py-6 border-b border-[var(--color-border)]">
         <div className="flex">

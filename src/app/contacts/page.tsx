@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/imageUtils";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MapPinIcon as MapPin, PhoneIcon as Phone, ClockIcon as Clock, TelegramLogoIcon as TelegramLogo, WhatsappLogoIcon as WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
@@ -30,6 +31,9 @@ export default function ContactsPage() {
               fill
               className="object-cover opacity-20"
               priority
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
             />
           </div>
           <div className="container-site relative z-10">
@@ -47,7 +51,7 @@ export default function ContactsPage() {
         </section>
 
         {/* Info + Map */}
-        <section className="container-site pb-28">
+        <section className="container-site pt-16 md:pt-24 pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
             {/* Info cards */}

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/imageUtils";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StarIcon as Star, ArrowRightIcon as ArrowRight } from "@phosphor-icons/react/dist/ssr";
@@ -106,6 +107,9 @@ export default function ReviewsPage() {
               fill
               className="object-cover opacity-20"
               priority
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
             />
           </div>
           <div className="container-site relative z-10">
@@ -125,7 +129,7 @@ export default function ReviewsPage() {
         </section>
 
         {/* ── Leave a review — primary CTA ─────────────────────────────── */}
-        <section className="container-site pb-16">
+        <section className="container-site pt-16 md:pt-24 pb-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {REVIEW_PLATFORMS.map((p, i) => (
               <a

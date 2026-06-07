@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { BLUR_DATA_URL } from "@/lib/imageUtils";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArrowRightIcon as ArrowRight } from "@phosphor-icons/react/dist/ssr";
@@ -44,6 +45,9 @@ export default async function AboutPage() {
               fill
               className="object-cover opacity-20"
               priority
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
             />
           </div>
           <div className="container-site relative z-10">
@@ -60,7 +64,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Intro */}
-        <section className="container-site pb-28">
+        <section className="container-site pt-16 md:pt-24 pb-28">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <div data-reveal>
               <p className="text-2xl md:text-3xl text-[var(--color-text)] leading-snug mb-8">
@@ -219,7 +223,7 @@ export default async function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="container-site pb-32">
+        <section className="container-site pb-16">
           <div
             data-reveal
             className="relative overflow-hidden p-12 md:p-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"

@@ -9,6 +9,7 @@ import {
   MapPinIcon,
 } from "@phosphor-icons/react";
 import { gsap } from "@/lib/gsap";
+import { BLUR_DATA_URL } from "@/lib/imageUtils";
 
 export function HomeHero() {
   const ghostRef  = useRef<HTMLSpanElement>(null);
@@ -93,6 +94,9 @@ export function HomeHero() {
           fill
           className="object-cover"
           priority
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
         />
         <div className="absolute inset-0 bg-[var(--color-bg)] opacity-70" />
       </div>
