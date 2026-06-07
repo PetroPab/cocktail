@@ -8,73 +8,75 @@ export function AnimationsProvider({ children }: { children: React.ReactNode }) 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const ctxRef    = useRef<ReturnType<typeof gsap.context> | null>(null);
   const rafRef    = useRef<number>(0);
+  const raf2Ref   = useRef<number>(0);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    // ── Page enter fade-in ─────────────────────────────────────────────────
+    // Page enter fade-in on every navigation
     gsap.fromTo(wrapper,
       { opacity: 0 },
       { opacity: 1, duration: 0.4, ease: "power2.out", clearProps: "opacity" }
     );
 
-    // Kill stale scroll triggers and previous GSAP context
+    // Kill stale triggers and context from previous page
     cancelAnimationFrame(rafRef.current);
+    cancelAnimationFrame(raf2Ref.current);
     ScrollTrigger.getAll().forEach((t) => t.kill());
     ctxRef.current?.revert();
     ctxRef.current = null;
 
-    // ── Defer reveal setup to next frame ───────────────────────────────────
-    // requestAnimationFrame ensures scroll position is accurate and DOM is painted
+    // Defer to next frame so the DOM is painted
     rafRef.current = requestAnimationFrame(() => {
       ctxRef.current = gsap.context(() => {
         document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
           const delay = Number(el.dataset.revealDelay ?? 0);
           const dir   = el.dataset.revealFrom; // "left" | "right" | undefined
 
-          const from: gsap.TweenVars = {
-            opacity: 0,
-            y: dir ? 0 : 44,
-            x: dir === "left" ? -44 : dir === "right" ? 44 : 0,
-          };
-          const to: gsap.TweenVars = {
-            opacity: 1, y: 0, x: 0,
-            duration: 0.75,
-            ease: "power3.out",
-          };
-
-          // If element is already within the visible viewport (e.g. on refresh
-          // while scrolled down), skip ScrollTrigger and animate right away.
-          const rect   = el.getBoundingClientRect();
-          const inView = rect.top < window.innerHeight * 0.92;
-
-          if (inView) {
-            gsap.fromTo(el, from, { ...to, delay: delay + 0.1 });
-          } else {
-            gsap.fromTo(el, from, {
-              ...to,
+          gsap.fromTo(
+            el,
+            {
+              opacity: 0,
+              y: dir ? 0 : 44,
+              x: dir === "left" ? -44 : dir === "right" ? 44 : 0,
+            },
+            {
+              opacity: 1, y: 0, x: 0,
+              duration: 0.75,
               delay,
+              ease: "power3.out",
               scrollTrigger: {
                 trigger: el,
                 start: "top 88%",
                 toggleActions: "play none none none",
+                // Recalculate positions on window resize
+                invalidateOnRefresh: true,
               },
-            });
-          }
+            }
+          );
         });
+      });
+
+      // First refresh: fires triggers already past their start point
+      // (handles normal page load at top + navigation)
+      ScrollTrigger.refresh();
+
+      // Second refresh one frame later: catches browsers that restore
+      // scroll position asynchronously after the first RAF
+      raf2Ref.current = requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
       });
     });
 
     return () => {
       cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(raf2Ref.current);
       ctxRef.current?.revert();
       ctxRef.current = null;
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, [pathname]);
 
-  // Wrapper div: used by GSAP for page-enter fade. Must be a box element
-  // (not display:contents) so opacity animates correctly.
   return <div ref={wrapperRef}>{children}</div>;
 }
