@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import Image from "next/image";
-import { MapPinIcon, PhoneIcon, ClockIcon, TelegramLogoIcon, InstagramLogoIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { MapPinIcon, PhoneIcon, ClockIcon, InstagramLogoIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { getSettings } from "@/db/queries";
 
 const NAV = [
@@ -12,18 +12,18 @@ const NAV = [
   { href: "/contacts", label: "Контакты" },
 ];
 
-function VkIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" width={size} height={size} aria-hidden="true">
-      <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.045-1.72-1.033-1-1.49-.99-1.746-.99-.356 0-.458.102-.458.596v1.57c0 .426-.136.68-1.254.68-1.846 0-3.896-1.12-5.335-3.203C4.624 10.857 4 8.408 4 7.932c0-.254.102-.49.596-.49h1.744c.444 0 .61.203.78.68.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.95c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.408.44-.408h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.49.763-.49h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.78 1.203 1.253.745.847 1.32 1.558 1.473 2.048.17.49-.085.745-.576.745z"/>
-    </svg>
-  );
-}
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 
-const SOCIALS = [
-  { href: "https://vk.com/bar_cocktail",        label: "ВКонтакте",  handle: "vk.com/bar_cocktail",    Icon: VkIcon },
-  { href: "https://t.me/s/cocktailbar_yar",           label: "Telegram",   handle: "t.me/s/cocktailbar_yar",      Icon: TelegramLogoIcon },
-  { href: "https://instagram.com/cocktail_bar_yar",  label: "Instagram",  handle: "@cocktail_bar_yar",          Icon: InstagramLogoIcon },
+type Social = {
+  href: string;
+  label: string;
+  handle: string;
+} & ({ iconSrc: string } | { Icon: PhosphorIcon });
+
+const SOCIALS: Social[] = [
+  { href: "https://vk.com/bar_cocktail",               label: "ВКонтакте", handle: "vk.com/bar_cocktail",      iconSrc: "/icons/vk-icon.svg" },
+  { href: "https://t.me/s/cocktailbar_yar",            label: "Telegram",  handle: "t.me/cocktailbar_yar",     iconSrc: "/icons/tg-icon.svg" },
+  { href: "https://instagram.com/cocktail_bar_yar",    label: "Instagram", handle: "@cocktail_bar_yar",        Icon: InstagramLogoIcon },
 ];
 
 export async function Footer() {
@@ -100,18 +100,28 @@ export async function Footer() {
           {/* Socials */}
           <div className="flex flex-col gap-3">
             <p className="text-[10px] tracking-widest uppercase text-[var(--color-text-subtle)] mb-1">Мы в сетях</p>
-            {SOCIALS.map(({ href, label, handle, Icon }) => (
+            {SOCIALS.map((s) => (
               <a
-                key={href}
-                href={href}
+                key={s.href}
+                href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-amber)] transition-colors duration-150"
               >
-                <Icon size={18} weight="fill" className="shrink-0 text-[var(--color-text-subtle)] group-hover:text-[var(--color-amber)] transition-colors" />
+                {"iconSrc" in s ? (
+                  <Image
+                    src={s.iconSrc}
+                    alt={s.label}
+                    width={18}
+                    height={18}
+                    className="shrink-0 opacity-60 group-hover:opacity-100 transition-opacity"
+                  />
+                ) : (
+                  <s.Icon size={18} weight="fill" className="shrink-0 text-[var(--color-text-subtle)] group-hover:text-[var(--color-amber)] transition-colors" />
+                )}
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold leading-none mb-0.5">{label}</span>
-                  <span className="text-[10px] text-[var(--color-text-subtle)]">{handle}</span>
+                  <span className="text-sm font-semibold leading-none mb-0.5">{s.label}</span>
+                  <span className="text-[10px] text-[var(--color-text-subtle)]">{s.handle}</span>
                 </div>
                 <ArrowUpRightIcon size={12} weight="bold" className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>

@@ -16,19 +16,17 @@ const REVIEW_PLATFORMS = [
     name: "Яндекс Карты",
     rating: "4.9",
     count: "2921 оценка",
-    color: "oklch(65% 0.2 30)",
+    iconSrc: "/icons/yandexmaps-icon.svg",
     writeUrl: "https://yandex.ru/maps/org/kokteyl/1357359355/reviews/?add-review=true",
     readUrl:  "https://yandex.ru/maps/org/kokteyl/1357359355/reviews/",
-    logo: "Я",
   },
   {
     name: "2ГИС",
     rating: "4.9",
     count: "2921 оценка",
-    color: "oklch(55% 0.18 145)",
+    iconSrc: "/icons/2gis.svg",
     writeUrl: "https://2gis.ru/yaroslavl/firm/3941177954980665/tab/reviews",
     readUrl:  "https://2gis.ru/yaroslavl/firm/3941177954980665/tab/reviews",
-    logo: "2",
   },
 ];
 
@@ -143,11 +141,8 @@ export default function ReviewsPage() {
               >
                 {/* Logo + name */}
                 <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 flex items-center justify-center text-xl font-bold text-white shrink-0"
-                    style={{ background: p.color, fontFamily: "var(--font-display)" }}
-                  >
-                    {p.logo}
+                  <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                    <Image src={p.iconSrc} alt={p.name} width={48} height={48} />
                   </div>
                   <div>
                     <p className="text-xs tracking-widest uppercase text-[var(--color-text-subtle)] mb-0.5">
@@ -179,7 +174,7 @@ export default function ReviewsPage() {
                 {/* CTA */}
                 <div
                   className="inline-flex items-center justify-center gap-2 h-12 px-6 text-sm tracking-widest uppercase font-medium transition-colors duration-150 text-[var(--color-bg)]"
-                  style={{ background: p.color }}
+                  style={{ background: "var(--color-amber)" }}
                 >
                   Написать отзыв <ArrowRight size={16} weight="bold" />
                 </div>
