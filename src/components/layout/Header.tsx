@@ -51,15 +51,21 @@ export function Header() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="shrink-0 opacity-90 hover:opacity-100 transition-opacity duration-150"
+            className="group shrink-0 relative overflow-hidden"
+            aria-label="Бар Коктейль — на главную"
           >
             <Image
               src="/logo-cocktail-1line.svg"
               alt="Бар Коктейль"
               width={201}
               height={36}
-              className="h-9 w-auto"
+              className="h-9 w-auto brightness-0 invert transition-opacity duration-300 group-hover:opacity-70"
               priority
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 pointer-events-none -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"
+              style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)" }}
             />
           </Link>
 
