@@ -39,22 +39,22 @@ const BAR: Category[] = [
     label: "Авторские",
     coloredBadges: true,
     items: [
-      { name: "Эль Чоко",     price: 540, badge: "Стронг",     desc: "Настой смородины дополняется шоколадным ликёром, а всё это подчёркивается освежающими оттенками мартини фиеро и биттера", img: "https://picsum.photos/seed/elchoko/400/300" },
-      { name: "Бали Цар",     price: 540, badge: "Стронг",     desc: "Яркий вишнёвый вкус и аромат с нотками миндаля, сладостью мартини фиеро и лёгкой горчинкой", img: "https://picsum.photos/seed/balitzar/400/300" },
-      { name: "Чойс Бойз",    price: 540, badge: "Стронг",     desc: "Дикое сочетание арктической тинктуры со сладостью можжевелового ликёра, ароматом ели и горечью абсента", img: "https://picsum.photos/seed/choiceboys/400/300" },
-      { name: "Гуччи",        price: 540, badge: "Саур",       desc: "Бархатный коктейль с ярким вкусом манго, сбалансированный сладостью рома, терпкостью текилы и горечью водки и джина", img: "https://picsum.photos/seed/guccisour/400/300" },
-      { name: "Хани Мани",    price: 540, badge: "Саур",       desc: "Изысканный коктейль на основе медового виски с добавлением ликёра бузины", img: "https://picsum.photos/seed/honeymoney/400/300" },
-      { name: "Авеллино",     price: 540, badge: "Саур",       desc: "Кисло-сладкий коктейль с тонким ароматом лета. Дынная настойка с тибетской ромашкой в сочетании с ликёром юдзу и мусом из зелёного чая", img: "https://picsum.photos/seed/avellino/400/300" },
-      { name: "Вэри Бэрри",   price: 540, badge: "Хайбол",    desc: "Настой лесных ягод в сочетании с джином и ягодной содовой", img: "https://picsum.photos/seed/veryberry/400/300" },
-      { name: "Советский",    price: 540, badge: "Хайбол",    desc: "Освежающий и лёгкий: цитрусовая кислинка, сладость груши и травянистые ноты джина", img: "https://picsum.photos/seed/sovetsky/400/300" },
-      { name: "Павалло",      price: 540, badge: "Хайбол",    desc: "Тропическое сочетание наливки из личи с апельсином и содовой из соцветий пассифлоры", img: "https://picsum.photos/seed/pavallo/400/300" },
-      { name: "Ловеррис",     price: 540, badge: "Баблс",     desc: "Сладость ягод ежевики, цветочные ноты лаванды и освежающая лёгкость игристого вина", img: "https://picsum.photos/seed/loveris/400/300" },
-      { name: "Глория",       price: 540, badge: "Баблс",     desc: "Аромат розового персика с жасмином и кислинка просекко", img: "https://picsum.photos/seed/gloria/400/300" },
-      { name: "Лампоне",      price: 540, badge: "Баблс",     desc: "Новый взгляд на классическое сочетание малины, лайма и мяты", img: "https://picsum.photos/seed/lampone/400/300" },
-      { name: "Деликат",      price: 540, badge: "Милк панч",  desc: "Необычное сочетание ореховых нот кокоса и миндаля со сдержанной сладостью томатной воды", img: "https://picsum.photos/seed/delikat/400/300" },
-      { name: "Флай зе Скай", price: 540, badge: "Милк панч",  desc: "Настой груши с ароматом ликёра банан-бузина и лёгкой кислинкой", img: "https://picsum.photos/seed/flythesky/400/300" },
-      { name: "Лав из…",      price: 540, badge: "Шорт",      desc: "Микс банана, клубники и ванили напоминает аромат той самой жвачки из детства", img: "https://picsum.photos/seed/lovefrom/400/300" },
-      { name: "Фреш мулл",    price: 540, badge: "Шорт",      desc: "Свежий взгляд на всем известный Московский мул", img: "https://picsum.photos/seed/freshmull/400/300" },
+      { name: "Эль Чоко",     price: 540, badge: "Стронг",     desc: "Настой смородины дополняется шоколадным ликёром, а всё это подчёркивается освежающими оттенками мартини фиеро и биттера", img: "https://picsum.photos/seed/elchoko/400/500" },
+      { name: "Бали Цар",     price: 540, badge: "Стронг",     desc: "Яркий вишнёвый вкус и аромат с нотками миндаля, сладостью мартини фиеро и лёгкой горчинкой", img: "https://picsum.photos/seed/balitzar/400/500" },
+      { name: "Чойс Бойз",    price: 540, badge: "Стронг",     desc: "Дикое сочетание арктической тинктуры со сладостью можжевелового ликёра, ароматом ели и горечью абсента", img: "https://picsum.photos/seed/choiceboys/400/500" },
+      { name: "Гуччи",        price: 540, badge: "Саур",       desc: "Бархатный коктейль с ярким вкусом манго, сбалансированный сладостью рома, терпкостью текилы и горечью водки и джина", img: "https://picsum.photos/seed/guccisour/400/500" },
+      { name: "Хани Мани",    price: 540, badge: "Саур",       desc: "Изысканный коктейль на основе медового виски с добавлением ликёра бузины", img: "https://picsum.photos/seed/honeymoney/400/500" },
+      { name: "Авеллино",     price: 540, badge: "Саур",       desc: "Кисло-сладкий коктейль с тонким ароматом лета. Дынная настойка с тибетской ромашкой в сочетании с ликёром юдзу и мусом из зелёного чая", img: "https://picsum.photos/seed/avellino/400/500" },
+      { name: "Вэри Бэрри",   price: 540, badge: "Хайбол",    desc: "Настой лесных ягод в сочетании с джином и ягодной содовой", img: "https://picsum.photos/seed/veryberry/400/500" },
+      { name: "Советский",    price: 540, badge: "Хайбол",    desc: "Освежающий и лёгкий: цитрусовая кислинка, сладость груши и травянистые ноты джина", img: "https://picsum.photos/seed/sovetsky/400/500" },
+      { name: "Павалло",      price: 540, badge: "Хайбол",    desc: "Тропическое сочетание наливки из личи с апельсином и содовой из соцветий пассифлоры", img: "https://picsum.photos/seed/pavallo/400/500" },
+      { name: "Ловеррис",     price: 540, badge: "Баблс",     desc: "Сладость ягод ежевики, цветочные ноты лаванды и освежающая лёгкость игристого вина", img: "https://picsum.photos/seed/loveris/400/500" },
+      { name: "Глория",       price: 540, badge: "Баблс",     desc: "Аромат розового персика с жасмином и кислинка просекко", img: "https://picsum.photos/seed/gloria/400/500" },
+      { name: "Лампоне",      price: 540, badge: "Баблс",     desc: "Новый взгляд на классическое сочетание малины, лайма и мяты", img: "https://picsum.photos/seed/lampone/400/500" },
+      { name: "Деликат",      price: 540, badge: "Милк панч",  desc: "Необычное сочетание ореховых нот кокоса и миндаля со сдержанной сладостью томатной воды", img: "https://picsum.photos/seed/delikat/400/500" },
+      { name: "Флай зе Скай", price: 540, badge: "Милк панч",  desc: "Настой груши с ароматом ликёра банан-бузина и лёгкой кислинкой", img: "https://picsum.photos/seed/flythesky/400/500" },
+      { name: "Лав из…",      price: 540, badge: "Шорт",      desc: "Микс банана, клубники и ванили напоминает аромат той самой жвачки из детства", img: "https://picsum.photos/seed/lovefrom/400/500" },
+      { name: "Фреш мулл",    price: 540, badge: "Шорт",      desc: "Свежий взгляд на всем известный Московский мул", img: "https://picsum.photos/seed/freshmull/400/500" },
     ],
   },
   {
@@ -408,7 +408,7 @@ function MenuCard({
   return (
     <div className="group bg-[var(--color-bg-surface)] border border-[var(--color-border)] hover:border-[var(--color-amber)] transition-colors duration-200 flex flex-col">
       {item.img && (
-        <div className="relative h-44 overflow-hidden shrink-0">
+        <div className="relative aspect-[4/5] overflow-hidden shrink-0">
           <Image
             src={item.img}
             alt={item.name}

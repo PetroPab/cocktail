@@ -1,10 +1,10 @@
 ﻿import type { Metadata } from "next";
+import type React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { BLUR_DATA_URL } from "@/lib/imageUtils";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ArrowRightIcon as ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon as ArrowRight, GiftIcon, PhoneIcon as Phone } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
   title: "Акции и скидки — Бар Коктейль Ярославль",
@@ -12,7 +12,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://kokteil-bar.ru/promo" },
 };
 
-const WEEKLY = [
+type WeeklyItem = {
+  day: string;
+  name: string;
+  badge: React.ReactNode;
+  desc: string;
+  accent: string;
+};
+
+const WEEKLY: WeeklyItem[] = [
   {
     day: "Понедельник",
     name: "День коктейля",
@@ -30,7 +38,7 @@ const WEEKLY = [
   {
     day: "Среда",
     name: "День сюрпризов",
-    badge: "🎁",
+    badge: <GiftIcon size={40} weight="fill" />,
     desc: "Подарки от бара при чеке от 1000 ₽",
     accent: "oklch(70% 0.17 55)",
   },
@@ -70,24 +78,6 @@ const PROMOS = [
     accent: "oklch(68% 0.18 280)",
     badge: "−15%",
     img: "https://picsum.photos/seed/students/800/500",
-  },
-  {
-    tag: "Группы 5+",
-    title: "Корпоративы и компании",
-    subtitle: "По предварительной брони",
-    desc: "Для компаний от 5 человек — специальные условия. Звоните или пишите в Telegram — составим программу вечера.",
-    accent: "var(--color-amber)",
-    badge: "VIP",
-    img: "https://picsum.photos/seed/corporate/800/500",
-  },
-  {
-    tag: "Май — Сентябрь",
-    title: "Летняя терраса",
-    subtitle: "Круглосуточно",
-    desc: "Летняя терраса в центре Ярославля. Лучшее место для вечера на свежем воздухе с коктейлем в руке.",
-    accent: "oklch(70% 0.15 150)",
-    badge: "☀",
-    img: "https://picsum.photos/seed/terrace/800/500",
   },
 ];
 
@@ -235,43 +225,30 @@ export default function PromoPage() {
               </article>
             ))}
           </div>
-        </section>
 
-        {/* CTA */}
-        <section className="bg-[var(--color-bg-surface)] py-24">
-          <div className="container-site">
-            <div data-reveal className="max-w-2xl">
-              <p className="text-xs tracking-[0.4em] uppercase text-[var(--color-amber)] mb-4">Не пропусти</p>
-              <h2
-                className="text-5xl md:text-7xl text-[var(--color-text)] mb-6 leading-none"
-                style={{ fontFamily: "var(--font-display)" }}
+          {/* Inline CTA after promo grid */}
+          <div data-reveal className="mt-8 border-t border-[var(--color-border)] pt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <p className="text-[var(--color-text-muted)] text-sm leading-relaxed max-w-sm">
+              Заинтересовало предложение? Свяжитесь с нами — расскажем подробности и забронируем стол.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <a
+                href="tel:+74852337356"
+                className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm tracking-widest uppercase
+                  bg-[var(--color-amber)] text-[var(--color-bg)] hover:bg-[var(--color-amber-hover)] transition-colors"
               >
-                СЛЕДИ ЗА
-                <br />
-                <span className="text-gradient">НОВОСТЯМИ</span>
-              </h2>
-              <p className="text-[var(--color-text-muted)] mb-8 leading-relaxed max-w-md">
-                Анонсы вечеринок, новые акции и специальные предложения — в нашем Telegram-канале.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://t.me/s/cocktailbar_yar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-12 px-8 text-sm tracking-widest uppercase
-                    bg-[var(--color-amber)] text-[var(--color-bg)] hover:bg-[var(--color-amber-hover)] transition-colors"
-                >
-                  Telegram-канал <ArrowRight size={16} weight="bold" />
-                </a>
-                <Link
-                  href="/contacts#booking"
-                  className="inline-flex items-center justify-center gap-2 h-12 px-8 text-sm tracking-widest uppercase
-                    border border-[var(--color-border-light)] text-[var(--color-text)] hover:border-[var(--color-amber)] hover:text-[var(--color-amber)]
-                    transition-colors"
-                >
-                  Забронировать стол
-                </Link>
-              </div>
+                <Phone size={16} weight="bold" /> Позвонить
+              </a>
+              <a
+                href="https://t.me/s/cocktailbar_yar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm tracking-widest uppercase
+                  border border-[var(--color-border-light)] text-[var(--color-text)] hover:border-[var(--color-amber)] hover:text-[var(--color-amber)]
+                  transition-colors"
+              >
+                Telegram <ArrowRight size={16} weight="bold" />
+              </a>
             </div>
           </div>
         </section>

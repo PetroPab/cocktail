@@ -34,7 +34,7 @@ const COCKTAILS_PREVIEW = [
 const FACTS = [
   { value: "1996", label: "Год открытия",        Icon: CalendarIcon },
   { value: "50+",  label: "Авторских коктейлей", Icon: WineIcon },
-  { value: "4.9",  label: "Рейтинг на 2ГИС",    Icon: Star },
+  { value: "4.9",  label: "Рейтинг на 2ГИС и Яндекс", Icon: Star },
   { value: "24/7", label: "Всегда открыты",      Icon: Clock },
 ] as const;
 
@@ -148,7 +148,7 @@ export default function HomePage() {
                       {c.name}
                     </h3>
                     <p className="text-xs md:text-sm text-[var(--color-text-muted)] mb-4 leading-relaxed flex-1">{c.desc}</p>
-                    <p className="text-xl md:text-2xl" style={{ fontFamily: "var(--font-display)", color: tagColor }}>
+                    <p className="text-xl md:text-2xl text-[var(--color-amber)]" style={{ fontFamily: "var(--font-display)" }}>
                       {c.price}
                     </p>
                   </div>

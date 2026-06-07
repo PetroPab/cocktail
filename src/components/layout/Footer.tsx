@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import Image from "next/image";
-import { MapPinIcon, PhoneIcon, ClockIcon, InstagramLogoIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { MapPinIcon, PhoneIcon, ClockIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { getSettings } from "@/db/queries";
 
 const NAV = [
@@ -12,18 +12,17 @@ const NAV = [
   { href: "/contacts", label: "Контакты" },
 ];
 
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
-
 type Social = {
   href: string;
   label: string;
   handle: string;
-} & ({ iconSrc: string } | { Icon: PhosphorIcon });
+  iconSrc: string;
+};
 
 const SOCIALS: Social[] = [
   { href: "https://vk.com/bar_cocktail",               label: "ВКонтакте", handle: "vk.com/bar_cocktail",      iconSrc: "/icons/vk-icon.svg" },
   { href: "https://t.me/s/cocktailbar_yar",            label: "Telegram",  handle: "t.me/cocktailbar_yar",     iconSrc: "/icons/tg-icon.svg" },
-  { href: "https://instagram.com/cocktail_bar_yar",    label: "Instagram", handle: "@cocktail_bar_yar",        Icon: InstagramLogoIcon },
+  { href: "https://instagram.com/cocktail_bar_yar",    label: "Instagram", handle: "@cocktail_bar_yar",        iconSrc: "/icons/instagram-icon.svg" },
 ];
 
 export async function Footer() {
@@ -108,17 +107,13 @@ export async function Footer() {
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-amber)] transition-colors duration-150"
               >
-                {"iconSrc" in s ? (
-                  <Image
-                    src={s.iconSrc}
-                    alt={s.label}
-                    width={18}
-                    height={18}
-                    className="shrink-0 opacity-60 group-hover:opacity-100 transition-opacity"
-                  />
-                ) : (
-                  <s.Icon size={18} weight="fill" className="shrink-0 text-[var(--color-text-subtle)] group-hover:text-[var(--color-amber)] transition-colors" />
-                )}
+                <Image
+                  src={s.iconSrc}
+                  alt={s.label}
+                  width={18}
+                  height={18}
+                  className="shrink-0 opacity-60 group-hover:opacity-100 transition-opacity"
+                />
                 <div className="flex flex-col">
                   <span className="text-sm font-semibold leading-none mb-0.5">{s.label}</span>
                   <span className="text-[10px] text-[var(--color-text-subtle)]">{s.handle}</span>

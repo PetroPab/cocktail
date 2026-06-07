@@ -96,46 +96,19 @@ export default function ContactsPage() {
                 </div>
               </div>
 
-              {/* Messenger links */}
-              <div className="flex gap-3">
-                <a
-                  href={bookingHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 glass rounded-[var(--radius-lg)] p-5 flex items-center gap-3 hover:border-[oklch(65%_0.2_220)] transition-colors duration-200 group"
-                >
-                  <TelegramLogo size={20} weight="fill" className="text-[oklch(65%_0.2_220)] shrink-0" />
-                  <span className="text-sm text-[var(--color-text-muted)] group-hover:text-[var(--color-text)] transition-colors">Написать в Telegram</span>
-                </a>
-              </div>
             </div>
 
-            {/* Interior photo + map link */}
-            <a
-              href={mapsHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative overflow-hidden min-h-[400px] block"
-            >
-              <Image
-                src="https://picsum.photos/seed/kokteilbar-interior/800/600"
-                alt="Интерьер бара Коктейль"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+            {/* Yandex Maps embed */}
+            <div className="overflow-hidden min-h-[400px]">
+              <iframe
+                src="https://yandex.ru/map-widget/v1/?ol=biz&oid=1357359355"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "400px", display: "block" }}
+                allowFullScreen
+                title="Бар Коктейль на карте"
               />
-              <div className="absolute inset-0 bg-[var(--color-bg)] opacity-50" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-center px-8">
-                <MapPin size={40} weight="fill" className="text-[var(--color-amber)]" />
-                <p className="text-[var(--color-text)] text-lg leading-snug">
-                  ул. Кирова, 5/23, 2-й этаж<br />
-                  <span className="text-[var(--color-text-muted)] text-sm">Ярославль</span>
-                </p>
-                <span className="inline-flex items-center h-11 px-6 text-xs tracking-widest uppercase
-                  bg-[var(--color-amber)] text-[var(--color-bg)] group-hover:bg-[var(--color-amber-hover)] transition-colors">
-                  Открыть на карте →
-                </span>
-              </div>
-            </a>
+            </div>
           </div>
         </section>
 
