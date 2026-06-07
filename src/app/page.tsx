@@ -11,15 +11,24 @@ import {
   StarIcon as Star, ClockIcon as Clock,
 } from "@phosphor-icons/react/dist/ssr";
 
+const TAG_COLOR: Record<string, string> = {
+  "Стронг":    "oklch(60% 0.22 15)",
+  "Саур":      "oklch(70% 0.17 55)",
+  "Хайбол":    "oklch(65% 0.18 200)",
+  "Баблс":     "oklch(65% 0.28 340)",
+  "Милк панч": "oklch(65% 0.14 270)",
+  "Шорт":      "oklch(65% 0.18 145)",
+};
+
 const COCKTAILS_PREVIEW = [
-  { name: "Эль Чоко",   desc: "Настой смородины, шоколадный ликёр, мартини фиеро и биттер",          price: "540 ₽", tag: "Стронг",     img: "https://picsum.photos/seed/elchoko/400/300" },
-  { name: "Гуччи",      desc: "Манго, ром, текила, водка и джин — бархатный тропический саур",        price: "540 ₽", tag: "Саур",       img: "https://picsum.photos/seed/guccisour/400/300" },
-  { name: "Хани Мани",  desc: "Медовый виски с ликёром бузины — изысканный и мягкий",                 price: "540 ₽", tag: "Саур",       img: "https://picsum.photos/seed/honeymoney/400/300" },
-  { name: "Авеллино",   desc: "Дынная настойка, ликёр юдзу и мус из зелёного чая",                   price: "540 ₽", tag: "Саур",       img: "https://picsum.photos/seed/avellino/400/300" },
-  { name: "Вэри Бэрри", desc: "Настой лесных ягод, джин и ягодная содовая",                          price: "540 ₽", tag: "Хайбол",    img: "https://picsum.photos/seed/veryberry/400/300" },
-  { name: "Ловеррис",   desc: "Ежевика, лаванда и игристое вино — лёгкий и романтичный",              price: "540 ₽", tag: "Баблс",     img: "https://picsum.photos/seed/loveris/400/300" },
-  { name: "Деликат",    desc: "Кокос, миндаль и томатная вода — необычный милк панч",                 price: "540 ₽", tag: "Милк панч", img: "https://picsum.photos/seed/delikat/400/300" },
-  { name: "Лав из…",    desc: "Банан, клубника и ваниль — вкус той самой жвачки из детства",          price: "540 ₽", tag: "Шорт",      img: "https://picsum.photos/seed/lovefrom/400/300" },
+  { name: "Эль Чоко",   desc: "Настой смородины, шоколадный ликёр, мартини фиеро и биттер",          price: "540 ₽", tag: "Стронг",     img: "https://picsum.photos/seed/elchoko/400/500" },
+  { name: "Гуччи",      desc: "Манго, ром, текила, водка и джин — бархатный тропический саур",        price: "540 ₽", tag: "Саур",       img: "https://picsum.photos/seed/guccisour/400/500" },
+  { name: "Хани Мани",  desc: "Медовый виски с ликёром бузины — изысканный и мягкий",                 price: "540 ₽", tag: "Саур",       img: "https://picsum.photos/seed/honeymoney/400/500" },
+  { name: "Авеллино",   desc: "Дынная настойка, ликёр юдзу и мус из зелёного чая",                   price: "540 ₽", tag: "Саур",       img: "https://picsum.photos/seed/avellino/400/500" },
+  { name: "Вэри Бэрри", desc: "Настой лесных ягод, джин и ягодная содовая",                          price: "540 ₽", tag: "Хайбол",     img: "https://picsum.photos/seed/veryberry/400/500" },
+  { name: "Ловеррис",   desc: "Ежевика, лаванда и игристое вино — лёгкий и романтичный",              price: "540 ₽", tag: "Баблс",      img: "https://picsum.photos/seed/loveris/400/500" },
+  { name: "Деликат",    desc: "Кокос, миндаль и томатная вода — необычный милк панч",                 price: "540 ₽", tag: "Милк панч",  img: "https://picsum.photos/seed/delikat/400/500" },
+  { name: "Лав из…",    desc: "Банан, клубника и ваниль — вкус той самой жвачки из детства",          price: "540 ₽", tag: "Шорт",       img: "https://picsum.photos/seed/lovefrom/400/500" },
 ];
 
 const FACTS = [
@@ -104,37 +113,48 @@ export default function HomePage() {
           </div>
 
           <div data-reveal data-reveal-delay="0.15" className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-border)]">
-            {COCKTAILS_PREVIEW.map((c) => (
-              <div
-                key={c.name}
-                className="group bg-[var(--color-bg-surface)] flex flex-col hover:bg-[var(--color-bg-elevated)] transition-colors duration-300"
-              >
-                <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={c.img}
-                    alt={c.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-[var(--color-bg)] opacity-20" />
-                  <span className="absolute top-3 left-3 text-[10px] tracking-widest uppercase text-[var(--color-amber)] bg-[var(--color-bg)] px-2 py-1">
-                    {c.tag}
-                  </span>
+            {COCKTAILS_PREVIEW.map((c) => {
+              const tagColor = TAG_COLOR[c.tag] ?? "var(--color-amber)";
+              return (
+                <div
+                  key={c.name}
+                  className="group bg-[var(--color-bg-surface)] flex flex-col hover:bg-[var(--color-bg-elevated)] transition-colors duration-300"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                      src={c.img}
+                      alt={c.name}
+                      fill
+                      sizes="(max-width: 640px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-[var(--color-bg)] opacity-20" />
+                    <span
+                      className="absolute top-3 left-3 text-[10px] tracking-widest uppercase px-2 py-1"
+                      style={{ color: tagColor, background: "var(--color-bg)" }}
+                    >
+                      {c.tag}
+                    </span>
+                  </div>
+                  <div className="p-4 md:p-6 flex flex-col flex-1">
+                    <div
+                      className="w-6 h-0.5 mb-3"
+                      style={{ background: tagColor }}
+                    />
+                    <h3
+                      className="text-xl md:text-2xl text-[var(--color-text)] mb-2 group-hover:text-[var(--color-amber)] transition-colors leading-none"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {c.name}
+                    </h3>
+                    <p className="text-xs md:text-sm text-[var(--color-text-muted)] mb-4 leading-relaxed flex-1">{c.desc}</p>
+                    <p className="text-xl md:text-2xl" style={{ fontFamily: "var(--font-display)", color: tagColor }}>
+                      {c.price}
+                    </p>
+                  </div>
                 </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3
-                    className="text-2xl text-[var(--color-text)] mb-2 group-hover:text-[var(--color-amber)] transition-colors leading-none"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {c.name}
-                  </h3>
-                  <p className="text-sm text-[var(--color-text-muted)] mb-6 leading-relaxed flex-1">{c.desc}</p>
-                  <p className="text-2xl text-[var(--color-amber)]" style={{ fontFamily: "var(--font-display)" }}>
-                    {c.price}
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-8 md:hidden">

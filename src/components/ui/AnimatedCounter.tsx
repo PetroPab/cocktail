@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface Props {
   value: string;
@@ -27,28 +27,39 @@ export function AnimatedCounter({ value, className, style, duration = 2 }: Props
     if (!el) return;
 
     const parsed = parse(value);
-    if (!parsed) return; // "24/7" — just show as-is, reveal handled by data-reveal parent
+    if (!parsed) return;
 
     const { n, suf, dec } = parsed;
-    const obj = { v: 0 };
+    let ctx: ReturnType<typeof gsap.context> | null = null;
 
-    const ctx = gsap.context(() => {
-      gsap.to(obj, {
-        v: n,
-        duration,
-        ease: "power2.out",
-        onUpdate() {
-          el.textContent = obj.v.toFixed(dec) + suf;
-        },
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          toggleActions: "play none none none",
-        },
-      });
-    });
+    // IntersectionObserver instead of ScrollTrigger — fires correctly regardless
+    // of scroll position on mount (handles page refresh anywhere on the page).
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
 
-    return () => ctx.revert();
+        const obj = { v: 0 };
+        ctx = gsap.context(() => {
+          gsap.to(obj, {
+            v: n,
+            duration,
+            ease: "power2.out",
+            onUpdate() {
+              el.textContent = obj.v.toFixed(dec) + suf;
+            },
+          });
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      ctx?.revert();
+    };
   }, [value, duration]);
 
   return (
