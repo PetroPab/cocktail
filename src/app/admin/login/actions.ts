@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { createSessionCookie } from "@/lib/auth";
+import { createSessionCookie, COOKIE_NAME } from "@/lib/auth";
 
 export async function loginAction(formData: FormData) {
   const password = formData.get("password") as string;
@@ -12,12 +12,11 @@ export async function loginAction(formData: FormData) {
     redirect("/admin/login?error=1");
   }
 
-  const cookieStore = await cookies();
-  const cookieStr = createSessionCookie(adminPassword);
-  const [nameVal, ...rest] = cookieStr.split("; ");
-  const [, value] = nameVal.split("=");
+  const cookieStr = await createSessionCookie(adminPassword);
+  const value = cookieStr.split(";")[0].split("=").slice(1).join("=");
 
-  cookieStore.set("admin_session", value, {
+  const cookieStore = await cookies();
+  cookieStore.set(COOKIE_NAME, value, {
     httpOnly: true,
     path: "/",
     sameSite: "lax",
@@ -29,6 +28,6 @@ export async function loginAction(formData: FormData) {
 
 export async function logoutAction() {
   const cookieStore = await cookies();
-  cookieStore.delete("admin_session");
+  cookieStore.delete(COOKIE_NAME);
   redirect("/admin/login");
 }
