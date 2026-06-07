@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BLUR_DATA_URL } from "@/lib/imageUtils";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { MapPinIcon as MapPin, PhoneIcon as Phone, ClockIcon as Clock, TelegramLogoIcon as TelegramLogo, WhatsappLogoIcon as WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
+import { MapPinIcon as MapPin, PhoneIcon as Phone, ClockIcon as Clock, TelegramLogoIcon as TelegramLogo } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
   title: "Контакты и бронирование — Бар Коктейль Ярославль",
@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 export default function ContactsPage() {
   const bookingHref = "https://t.me/s/cocktailbar_yar";
   const phoneHref = "tel:+74852337356";
-  const waHref = "https://wa.me/74852337356";
   const mapsHref = "https://yandex.ru/maps/org/kokteyl/1357359355/";
 
   return (
@@ -100,22 +99,13 @@ export default function ContactsPage() {
               {/* Messenger links */}
               <div className="flex gap-3">
                 <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 glass rounded-[var(--radius-lg)] p-5 flex items-center gap-3 hover:border-[oklch(65%_0.2_145)] transition-colors duration-200 group"
-                >
-                  <WhatsappLogo size={20} weight="fill" className="text-[oklch(65%_0.2_145)] shrink-0" />
-                  <span className="text-sm text-[var(--color-text-muted)] group-hover:text-[var(--color-text)] transition-colors">WhatsApp</span>
-                </a>
-                <a
                   href={bookingHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 glass rounded-[var(--radius-lg)] p-5 flex items-center gap-3 hover:border-[oklch(65%_0.2_220)] transition-colors duration-200 group"
                 >
                   <TelegramLogo size={20} weight="fill" className="text-[oklch(65%_0.2_220)] shrink-0" />
-                  <span className="text-sm text-[var(--color-text-muted)] group-hover:text-[var(--color-text)] transition-colors">Telegram</span>
+                  <span className="text-sm text-[var(--color-text-muted)] group-hover:text-[var(--color-text)] transition-colors">Написать в Telegram</span>
                 </a>
               </div>
             </div>
