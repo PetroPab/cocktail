@@ -63,18 +63,19 @@ export const getLatestPublishedPosts = (n: number) =>
     { tags: ["posts"], revalidate: 3600 },
   )();
 
-export const getPostBySlug = unstable_cache(
-  async (slug: string): Promise<PostRow | null> => {
-    if (!db) return null;
-    const rows = await db
-      .select()
-      .from(posts)
-      .where(and(eq(posts.slug, slug), eq(posts.published, true)));
-    return rows[0] ?? null;
-  },
-  ["post-by-slug"],
-  { tags: ["posts"], revalidate: 3600 },
-);
+export const getPostBySlug = (slug: string) =>
+  unstable_cache(
+    async (): Promise<PostRow | null> => {
+      if (!db) return null;
+      const rows = await db
+        .select()
+        .from(posts)
+        .where(and(eq(posts.slug, slug), eq(posts.published, true)));
+      return rows[0] ?? null;
+    },
+    [`post-by-slug-${slug}`],
+    { tags: ["posts"], revalidate: 3600 },
+  )();
 
 export async function getAllPosts(): Promise<PostRow[]> {
   if (!db) return [];

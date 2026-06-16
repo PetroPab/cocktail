@@ -17,10 +17,10 @@ async function hmac(value: string, secret: string): Promise<string> {
     .join("");
 }
 
-export async function createSessionCookie(password: string): Promise<string> {
+export async function createSessionValue(password: string): Promise<string> {
   const ts = Date.now().toString();
   const sig = await hmac(ts, password);
-  return `${COOKIE_NAME}=${ts}:${sig}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${MAX_AGE}`;
+  return `${ts}:${sig}`;
 }
 
 export async function verifySession(cookieValue: string | undefined): Promise<boolean> {
@@ -41,8 +41,4 @@ export async function verifySession(cookieValue: string | undefined): Promise<bo
   return age < MAX_AGE * 1000;
 }
 
-export function clearSessionCookie(): string {
-  return `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
-}
-
-export { COOKIE_NAME };
+export { COOKIE_NAME, MAX_AGE };

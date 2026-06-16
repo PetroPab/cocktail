@@ -2,9 +2,16 @@
 
 import { redirect } from "next/navigation";
 import { revalidateTag, revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
 import { db } from "@/db/index";
 import { posts } from "@/db/schema";
+import { verifySession, COOKIE_NAME } from "@/lib/auth";
+
+async function requireAdmin() {
+  const store = await cookies();
+  if (!(await verifySession(store.get(COOKIE_NAME)?.value))) redirect("/admin/login");
+}
 
 function slugify(title: string): string {
   return title
@@ -24,6 +31,7 @@ function slugify(title: string): string {
 }
 
 export async function createPost(formData: FormData) {
+  await requireAdmin();
   if (!db) redirect("/admin/news");
 
   const title = String(formData.get("title") || "");
@@ -47,6 +55,7 @@ export async function createPost(formData: FormData) {
 }
 
 export async function updatePost(id: number, formData: FormData) {
+  await requireAdmin();
   if (!db) redirect("/admin/news");
 
   const slug = String(formData.get("slug") || "");
@@ -73,6 +82,7 @@ export async function updatePost(id: number, formData: FormData) {
 }
 
 export async function deletePost(id: number) {
+  await requireAdmin();
   if (!db) return;
   await db.delete(posts).where(eq(posts.id, id));
   revalidateTag("posts", {});

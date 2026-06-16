@@ -160,7 +160,7 @@
 ```env
 DATABASE_URL        # PostgreSQL connection string (Neon)
 ADMIN_PASSWORD      # Пароль для входа в /admin
-NEXT_PUBLIC_YM_ID   # Yandex Metrika ID (опционально)
+NEXT_PUBLIC_YM_COUNTER  # Yandex Metrika ID счётчика (опционально)
 ```
 
 ---

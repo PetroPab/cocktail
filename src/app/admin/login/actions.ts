@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { createSessionCookie, COOKIE_NAME } from "@/lib/auth";
+import { createSessionValue, COOKIE_NAME, MAX_AGE } from "@/lib/auth";
 
 export async function loginAction(formData: FormData) {
   const password = formData.get("password") as string;
@@ -12,15 +12,15 @@ export async function loginAction(formData: FormData) {
     redirect("/admin/login?error=1");
   }
 
-  const cookieStr = await createSessionCookie(adminPassword);
-  const value = cookieStr.split(";")[0].split("=").slice(1).join("=");
+  const value = await createSessionValue(adminPassword);
 
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, value, {
     httpOnly: true,
     path: "/",
     sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: MAX_AGE,
+    secure: process.env.NODE_ENV === "production",
   });
 
   redirect("/admin");

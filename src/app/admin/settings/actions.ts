@@ -2,14 +2,19 @@
 
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { db } from "@/db/index";
 import { settings } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { verifySession, COOKIE_NAME } from "@/lib/auth";
+
+async function requireAdmin() {
+  const store = await cookies();
+  if (!(await verifySession(store.get(COOKIE_NAME)?.value))) redirect("/admin/login");
+}
 
 export async function saveSettings(formData: FormData) {
+  await requireAdmin();
   if (!db) redirect("/admin/settings");
-
-  const keys = ["hours", "address", "phone", "telegram", "custom_1_key", "custom_1_val", "custom_2_key", "custom_2_val"];
 
   const pairs: Array<{ key: string; value: string }> = [];
 

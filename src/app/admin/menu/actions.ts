@@ -2,11 +2,19 @@
 
 import { redirect } from "next/navigation";
 import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
 import { db } from "@/db/index";
 import { menuItems } from "@/db/schema";
+import { verifySession, COOKIE_NAME } from "@/lib/auth";
+
+async function requireAdmin() {
+  const store = await cookies();
+  if (!(await verifySession(store.get(COOKIE_NAME)?.value))) redirect("/admin/login");
+}
 
 export async function createMenuItem(formData: FormData) {
+  await requireAdmin();
   if (!db) redirect("/admin/menu");
 
   await db.insert(menuItems).values({
@@ -27,6 +35,7 @@ export async function createMenuItem(formData: FormData) {
 }
 
 export async function updateMenuItem(id: number, formData: FormData) {
+  await requireAdmin();
   if (!db) redirect("/admin/menu");
 
   await db
@@ -50,6 +59,7 @@ export async function updateMenuItem(id: number, formData: FormData) {
 }
 
 export async function deleteMenuItem(id: number) {
+  await requireAdmin();
   if (!db) return;
   await db.delete(menuItems).where(eq(menuItems.id, id));
   revalidateTag("menu", {});
